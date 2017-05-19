@@ -8,11 +8,11 @@ public class Fatura {
 		this.nome = nome;
 		this.valor = valor;
 	}
-	public String getN() {
+	public String getNome() {
 		return nome;
 	}
 
-	public void setN(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 

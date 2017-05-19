@@ -6,22 +6,17 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
-import org.zkoss.zkplus.databind.AnnotateDataBinder;
-import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Radiogroup;
 import org.zkoss.zul.Textbox;
 
 public class CIndex extends GenericForwardComposer {
-	private DataBinder binder;
 	private Textbox txtbxNomeCliente;
 	private Decimalbox dcmlbxValorFatura;
 	private Radiogroup rdgrpTipoImposto;
 
-	public void doAfterCompose(Component comp) throws Exception {
-		super.doAfterCompose(comp);
-		binder = new AnnotateDataBinder(comp);
-		binder.loadAll();
+	public void doAfterCompose(Component componente) throws Exception {
+		super.doAfterCompose(componente);
 	}
 
 	public void onClick$btnGerarNotaFiscal() {
@@ -29,11 +24,21 @@ public class CIndex extends GenericForwardComposer {
 		Events.echoEvent("onGerarNotaFiscal", this.self, null);
 	}
 
+	private String getNomeDoCliente(){ 
+		return this.txtbxNomeCliente.getValue();
+	}
+	
+	private double getValorDoImposto(){ 
+		return this.dcmlbxValorFatura.getValue().doubleValue();
+	}
+	
+	private String getTipoDeImposto(){
+		return this.rdgrpTipoImposto.getSelectedItem().getValue().toString();
+	}
+	
 	public void onGerarNotaFiscal() {
-		Fatura fatura = new Fatura(this.txtbxNomeCliente.getValue(), this.dcmlbxValorFatura.getValue().doubleValue());
-		
-		ImpostoFiscal imposto = ImpostoFiscal.crie(this.rdgrpTipoImposto.getSelectedItem().getValue().toString());
-
+		Fatura fatura = new Fatura(getNomeDoCliente(), getValorDoImposto());
+		ImpostoFiscal imposto = ImpostoFiscal.crie(getTipoDeImposto());
 		new GeradorNotaFiscal().geraNota(fatura, imposto);		
 		Clients.clearBusy();
 		
