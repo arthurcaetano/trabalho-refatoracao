@@ -5,7 +5,7 @@ public class GeradorNotaFiscal {
 	public void geraNota(Fatura fatura, ImpostoFiscal imposto) {
 		NotaFiscal notaFiscal = geraNotaFiscal(fatura, imposto);
 		new DaoNotaFiscal().insira(notaFiscal);
-		new EnvioDeEmail().enviar("tiulo", "mensagem");
+		new EnvioDeEmail().enviar(notaFiscal);
 	}
 
 	private NotaFiscal geraNotaFiscal(Fatura fatura, ImpostoFiscal imposto) {

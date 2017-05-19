@@ -11,14 +11,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class EnvioDeEmail {
-	public void enviar(String titulo, String mensagem){
+	public void enviar(NotaFiscal nota){
 		try {
-
 			Message message = new MimeMessage(gereSessao());
 			message.setFrom(new InternetAddress("refatoracaoalfa2017@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse("caetano_arthur@hotmail.com"));
-			message.setSubject(titulo);
-			message.setText(mensagem);
+			message.setSubject("Nota fiscal gerada");
+			message.setText(monteTextoDaMensagem(nota));
 
 			Transport.send(message);
 
@@ -26,7 +25,11 @@ public class EnvioDeEmail {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
+	private String monteTextoDaMensagem(NotaFiscal nota){
+		return "Nota fiscal gerada no valor de R$ " + nota.getValorBruto() + ", e o imposto calculado foi de R$ " + nota.getValorDoImposto();
+	}
+	
 	private Session gereSessao() {
 		final String username = "refatoracaoalfa2017@gmail.com";
 		final String password = "refatoracao123";
