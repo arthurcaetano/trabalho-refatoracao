@@ -1,18 +1,19 @@
 package br.com.diego.nf;
 
 public class GeradorNotaFiscal {
-	public void geraNota(Fatura f, Imposto imposto) {
-		NotaFiscal notaFiscal = geraNotaFiscal(f, imposto);
+	
+	public void geraNota(Fatura fatura, ImpostoFiscal imposto) {
+		NotaFiscal notaFiscal = geraNotaFiscal(fatura, imposto);
 		new DaoNotaFiscal().insira(notaFiscal);
 		new EnvioDeEmail().enviar("tiulo", "mensagem");
 	}
 
-	private NotaFiscal geraNotaFiscal(Fatura f, Imposto imposto) {
+	private NotaFiscal geraNotaFiscal(Fatura fatura, ImpostoFiscal imposto) {
 		double valorImposto = 0;
 
-		valorImposto = imposto.getValor(f.getV());
+		valorImposto = imposto.getValor(fatura.getValor());
 
-		NotaFiscal notaFiscal = new NotaFiscal(valorImposto, f.getV());
+		NotaFiscal notaFiscal = new NotaFiscal(valorImposto, fatura.getValor());
 		return notaFiscal;
 	}
 }

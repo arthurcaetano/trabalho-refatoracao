@@ -31,13 +31,8 @@ public class CIndex extends GenericForwardComposer {
 
 	public void onGerarNotaFiscal() {
 		Fatura fatura = new Fatura(this.txtbxNomeCliente.getValue(), this.dcmlbxValorFatura.getValue().doubleValue());
-		Imposto imposto;
-
-		if (this.rdgrpTipoImposto.getSelectedItem().getValue().toString().compareTo("1") == 0) {
-			imposto = new ISS();
-		} else {
-			imposto = new ICMS();
-		}
+		
+		ImpostoFiscal imposto = ImpostoFiscal.crie(this.rdgrpTipoImposto.getSelectedItem().getValue().toString());
 
 		new GeradorNotaFiscal().geraNota(fatura, imposto);		
 		Clients.clearBusy();

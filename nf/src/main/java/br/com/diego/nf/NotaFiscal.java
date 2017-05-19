@@ -9,41 +9,41 @@ import javax.persistence.Id;
 public class NotaFiscal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private double i;
-	private double vb;
+	private int identificador;
+	private double valorDoImposto;
+	private double valorBruto;
 
-	public NotaFiscal(double i, double vb) {
-		this.i = i;
-		this.vb = vb;
+	public NotaFiscal(double valorDoImposto, double valorBruto) {
+		this.valorDoImposto = valorDoImposto;
+		this.valorBruto = valorBruto;
 	}
 	
 	public NotaFiscal(){
 		
 	}
 
-	public int getId() {
-		return id;
+	public int getIdentificador() {
+		return identificador;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdentificador(int identificador) {
+		this.identificador = identificador;
 	}
 
-	public double getI() {
-		return i;
+	public double getValorDoImposto() {
+		return valorDoImposto;
 	}
 
-	public void setI(double i) {
-		this.i = i;
+	public void setValorDoImposto(double valorDoImposto) {
+		this.valorDoImposto = valorDoImposto;
 	}
 
-	public double getVb() {
-		return vb;
+	public double getValorBruto() {
+		return valorBruto;
 	}
 
-	public void setVb(double vb) {
-		this.vb = vb;
+	public void setValorBruto(double valorBruto) {
+		this.valorBruto = valorBruto;
 	}
 
 }
