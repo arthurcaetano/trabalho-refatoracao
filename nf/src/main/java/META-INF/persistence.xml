@@ -6,12 +6,12 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 
 	<persistence-unit name="postgres" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>br.com.diego.nf.NotaFiscal</class>
+		<class>br.com.nf.model.dao.NotaFiscalDao</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/base" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/postgres" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="masterkey" />
+			<property name="javax.persistence.jdbc.password" value="123" />
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
